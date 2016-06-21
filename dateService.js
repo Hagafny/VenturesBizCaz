@@ -1,7 +1,7 @@
 'use strict';
 
 var redis = require('redis');
-var client = redis.createClient();
+var client = redis.createClient(process.env.REDIS_URL);
 
 function isBizCaz(day, month, cb) {
 
