@@ -13,8 +13,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'pug');
 
 app.get('/', (req, res) => {
+
     var currentMonth = new Date().getUTCMonth() + 1;
-    var currentDay1 = new Date().getUTCDate();
+    var currentDay1 = new Date().toUTCString();
     var currentDay2 = new Date(currentDay1);
 
     currentDay2.setMinutes(currentDay1.getMinutes() + 180);
