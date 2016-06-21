@@ -6,18 +6,15 @@ const path = require('path');
 const dateService = require('./dateService.js');
 const logicService = require('./logicService.js');
 
-
 app.set('port', (process.env.PORT || 5000));
-
-app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'pug');
 
-app.get('/', (req, res) => {
+app.use(express.static(path.join(__dirname, 'public')));
 
+app.get('/', (req, res) => {
     var currentMonth = new Date().getUTCMonth() + 1;
     var currentDay1 = new Date();
     var currentDay2 = new Date(currentDay1);
-
     currentDay2.setMinutes(currentDay1.getMinutes() + 180);
 
     res.redirect(`/${currentMonth}/${currentDay2.getDate()}`);
@@ -33,4 +30,3 @@ app.get('/:month/:day', (req, res) => {
 app.listen(app.get('port'), () => {
     console.log(`Example app listening on port ${app.get('port')}`);
 });
-
