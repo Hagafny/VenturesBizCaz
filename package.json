@@ -1,0 +1,17 @@
+{
+  "name": "bizcaz",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "Ron Hagafny",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.14.0",
+    "pug": "^0.1.0",
+    "redis": "^2.6.2"
+  }
+}
