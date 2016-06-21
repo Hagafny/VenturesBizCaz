@@ -3,7 +3,7 @@
 function getData(isBizCaz) {
     let BizCazData = {};
     if (isBizCaz === null) {
-        BizCazData.message = "Not available yet";
+        BizCazData.message = "N/A";
         BizCazData.image = "../img/unknown.jpg";
     }
     else if (isBizCaz) {
@@ -11,7 +11,7 @@ function getData(isBizCaz) {
         BizCazData.image = "../img/suitup.jpg";
     }
     else {
-        BizCazData.message = "No!";
+        BizCazData.message = "No";
         BizCazData.image = "../img/pajamas.jpg";
     }
 

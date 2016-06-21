@@ -13,8 +13,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'pug');
 
 app.get('/', (req, res) => {
-    var currentMonth = new Date().getMonth() + 1;
-    var currentDay = new Date().getDate();
+    var currentMonth = new Date().getUTCMonth() + 1;
+    var currentDay = new Date().getUTCDate();
     res.redirect(`/${currentMonth}/${currentDay}`);
 });
 
