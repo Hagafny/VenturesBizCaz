@@ -8,11 +8,11 @@ function getData(isBizCaz) {
         BizCazData.image = "../img/unknown.jpg";
     }
     else if (isBizCaz) {
-        BizCazData.message = "Yes! Suit Up!";
+        BizCazData.message = "YES";
         BizCazData.image = "../img/suitup.jpg";
     }
     else {
-        BizCazData.message = "No";
+        BizCazData.message = "NO";
         BizCazData.image = "../img/pajamas.jpg";
     }
 
