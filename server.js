@@ -5,7 +5,9 @@ const app = express();
 const path = require('path');
 const dateService = require('./dateService.js');
 const logicService = require('./logicService.js');
-const port = 8000;
+
+
+app.set('port', (process.env.PORT || 5000));
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'pug');
@@ -23,7 +25,7 @@ app.get('/:month/:day', (req, res) => {
     });
 });
 
-app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`);
+app.listen(app.get('port'), () => {
+    console.log(`Example app listening on port ${app.get('port')}`);
 });
 
