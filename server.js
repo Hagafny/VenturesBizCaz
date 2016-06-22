@@ -21,9 +21,6 @@ app.get('/:month/:day', (req, res) => {
     getData(req.params.month, req.params.day, (data) => {
         res.render('index', data);
     });
-    //dateService.isBizCaz(req.params.month, req.params.day, (isBizCaz) => {
-    //   let data = logicService.getData(req.params.month, req.params.day, isBizCaz);
-    //    res.render('index', data);
 });
 
 function getData(month, day, cb) {
