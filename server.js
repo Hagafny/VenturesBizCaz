@@ -19,7 +19,7 @@ app.get('/', (req, res) => {
 
 app.get('/:month/:day', (req, res) => {
     dateService.isBizCaz(req.params.month, req.params.day, (isBizCaz) => {
-        let data = logicService.getData(req.params.month, isBizCaz);
+        let data = logicService.getData(req.params.month, req.params.day, isBizCaz);
         res.render('index', data);
     });
 });

@@ -1,8 +1,8 @@
 'use strict';
 
 const redis = require('redis');
+//const client = redis.createClient(process.env.REDIS_URL);
 const client = redis.createClient(process.env.REDIS_URL);
-
 function isBizCaz(day, month, cb) {
 
     let key = getFormatDate(day, month);
@@ -25,7 +25,6 @@ function getCurrentDate() {
     let currentDay1 = new Date();
     let currentDay2 = new Date(currentDay1);
     currentDay2.setMinutes(currentDay1.getMinutes() + 180);
-
     return getFormatDate(currentMonth, currentDay2.getDate());
 }
 
