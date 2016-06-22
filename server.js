@@ -18,11 +18,20 @@ app.get('/', (req, res) => {
 });
 
 app.get('/:month/:day', (req, res) => {
-    dateService.isBizCaz(req.params.month, req.params.day, (isBizCaz) => {
-        let data = logicService.getData(req.params.month, req.params.day, isBizCaz);
+    getData(req.params.month, req.params.day, (data) => {
         res.render('index', data);
     });
+    //dateService.isBizCaz(req.params.month, req.params.day, (isBizCaz) => {
+    //   let data = logicService.getData(req.params.month, req.params.day, isBizCaz);
+    //    res.render('index', data);
 });
+
+function getData(month, day, cb) {
+    dateService.isBizCaz(month, day, (isBizCaz) => {
+        let data = logicService.getData(month, day, isBizCaz);
+        cb(data);
+    });
+}
 
 app.listen(app.get('port'), () => {
     console.log(`Example app listening on port ${app.get('port')}`);
