@@ -1,8 +1,8 @@
 'use strict';
 
 const redis = require('redis');
-//const client = redis.createClient(process.env.REDIS_URL);
 const client = redis.createClient(process.env.REDIS_URL);
+
 function isBizCaz(day, month, cb) {
 
     let key = getFormatDate(day, month);
@@ -14,7 +14,7 @@ function isBizCaz(day, month, cb) {
         else if (reply === "0")
             isBizCaz = false;
         else
-            isBizCaz = null;
+            isBizCaz = null; 
 
         cb(isBizCaz);
     })
