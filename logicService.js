@@ -1,7 +1,11 @@
 'use strict';
 
+const dateService = require('./dateService.js');
+
 function getData(isBizCaz) {
-    let BizCazData = {};
+    let BizCazData = {
+        currentDate: dateService.getCurrentDate(),
+    };
     if (isBizCaz === null) {
         BizCazData.message = "N/A";   
         BizCazData.image = "../img/unknown.jpg";
