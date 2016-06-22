@@ -35,5 +35,6 @@ function getFormatDate(month, day) {
 
 module.exports = {
     isBizCaz: isBizCaz,
-    getCurrentDate: getCurrentDate
+    getCurrentDate: getCurrentDate,
+    getFormatDate: getFormatDate
 };

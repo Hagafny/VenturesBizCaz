@@ -2,9 +2,9 @@
 
 const dateService = require('./dateService.js');
 
-function getData(isBizCaz) {
+function getData(month, day, isBizCaz) {
     let BizCazData = {
-        currentDate: dateService.getCurrentDate(),
+        currentDate: dateService.getFormatDate(month, day),
     };
     if (isBizCaz === null) {
         BizCazData.message = "N/A";   
