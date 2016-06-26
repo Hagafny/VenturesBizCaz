@@ -32,8 +32,40 @@ function getFormatDate(month, day) {
     return `${month}/${day}`;
 }
 
+
+function getNextDay(month, day) {
+    return modifyDay("+", month, day);
+}
+
+function getPreviousDay(month, day) {
+    return modifyDay("-", month, day);
+}
+
+function modifyDay(operation, month, day) {
+    if (operation == "+") {
+            day++;
+
+        if (day == 31) {
+            day = 1;
+            month++;
+        }
+    }
+    else {
+        day--;
+        if (day == 0) {
+            day = 30;
+            month--;
+        }
+    }
+
+    return getFormatDate(month,day);
+
+}
+
 module.exports = {
     isBizCaz: isBizCaz,
     getCurrentDate: getCurrentDate,
-    getFormatDate: getFormatDate
+    getFormatDate: getFormatDate,
+    getNextDay: getNextDay,
+    getPreviousDay: getPreviousDay
 };

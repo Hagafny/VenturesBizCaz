@@ -1,10 +1,12 @@
 'use strict';
-
+const path = require('path');
 const dateService = require('./dateService.js');
-
+console.log(__dirname);
 function getData(month, day, isBizCaz) {
     let BizCazData = {
         currentDate: dateService.getFormatDate(month, day),
+        nextDay: dateService.getNextDay(month, day),
+        previousDay: dateService.getPreviousDay(month, day)
     };
     if (isBizCaz === null) {
         BizCazData.message = "N/A";   
@@ -18,7 +20,7 @@ function getData(month, day, isBizCaz) {
         BizCazData.message = "NO";
         BizCazData.image = "../img/pajamas.jpg";
     }
-
+    console.log(BizCazData);
     return BizCazData;
 }
 
