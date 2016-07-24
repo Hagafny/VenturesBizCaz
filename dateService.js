@@ -45,7 +45,7 @@ function modifyDay(operation, month, day) {
     if (operation == "+") {
         day++;
 
-        if ((month == 7 && day == 31) || (month == 8 && day == 32)) {
+        if ((month == 7 && day == 30) || (month == 8 && day == 31)) {
             day = 1;
             month++;
         }
@@ -57,7 +57,7 @@ function modifyDay(operation, month, day) {
                 day = 30;
             else if (month == 8)
                 day = 31;
-                
+
             month--;
         }
     }
