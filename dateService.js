@@ -14,7 +14,7 @@ function isBizCaz(day, month, cb) {
         else if (reply === "0")
             isBizCaz = false;
         else
-            isBizCaz = null; 
+            isBizCaz = null;
 
         cb(isBizCaz);
     })
@@ -43,9 +43,9 @@ function getPreviousDay(month, day) {
 
 function modifyDay(operation, month, day) {
     if (operation == "+") {
-            day++;
+        day++;
 
-        if (day == 31) {
+        if ((month == 7 && day == 31) || (month == 8 && day == 32)) {
             day = 1;
             month++;
         }
@@ -53,12 +53,16 @@ function modifyDay(operation, month, day) {
     else {
         day--;
         if (day == 0) {
-            day = 30;
+            if (month == 7)
+                day = 30;
+            else if (month == 8)
+                day = 31;
+                
             month--;
         }
     }
 
-    return getFormatDate(month,day);
+    return getFormatDate(month, day);
 
 }
 
