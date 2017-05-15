@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.14.0",
+    "node-calendar": "^0.1.4",
     "pug": "^0.1.0",
     "redis": "^2.6.2",
     "serve-favicon": "^2.3.0"
