@@ -2,8 +2,7 @@
 
 const redis = require('redis');
 const calendar = require('node-calendar');
-//const client = redis.createClient(process.env.REDIS_URL);
-const client = redis.createClient("redis://h:pcja62bcf30eal6edisiktfvkno@ec2-174-129-199-193.compute-1.amazonaws.com:6869");
+const client = redis.createClient(process.env.REDIS_URL);
 
 function getBizCazData(month, day, year, cb) {
     let hash = `${month}/${year}`;
