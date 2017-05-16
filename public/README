@@ -1,0 +1,9 @@
+For ron:
+To enter redis cli:
+* log in to heroku via the heroku cli
+* type heroku redis:cli -a bizcaz --confirm bizcaz
+
+every month is a new hashSet with <month/year> <day> <value> template.
+For examples, June 8th 2017 is a BizCaz day with the caption "Ron's Birthday"
+to store it we use:
+hset 6/17 8 "1Ron's Birthday"

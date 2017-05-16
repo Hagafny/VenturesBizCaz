@@ -25,7 +25,8 @@ app.get('/', (req, res) => {
 });
 
 app.get('/day/:month/:day/:year', (req, res) => {
-    dateService.isBizCaz(req.params.month, req.params.day, req.params.year, (isBizCaz) => {
+    dateService.getBizCazData(req.params.month, req.params.day, req.params.year, (isBizCaz) => {
+
         let data = logicService.getData(req.params.month, req.params.day, req.params.year, isBizCaz);
         res.render('index', data);
     });
@@ -47,13 +48,9 @@ app.get('/api/getMonthData/:month/:year', (req, res) => {
 });
 
 app.post('/api/upateBizCazValue/', (req, res) => {
-    dateService.upateBizCazValue(req.body.date, req.body.value, (status) => {
+    dateService.upateBizCazValue(req.body.date, req.body.value, req.body.notes, (status) => {
         res.json({ status: status });
     });
-});
-
-app.get('/what', (req, res) => {
-    res.json({wat:"wat"});
 });
 
 app.listen(app.get('port'), () => {

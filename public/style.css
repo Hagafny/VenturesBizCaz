@@ -1,5 +1,5 @@
 body {
-  padding-top: 5rem;
+  padding-top: 1rem;
 }
 .starter-template { 
   text-align: center;
@@ -9,4 +9,8 @@ body {
 color: #0275d8;
 padding: 15px;
 cursor: pointer;
+}
+
+.adminRow td {
+  vertical-align: middle;
 }

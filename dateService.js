@@ -2,22 +2,33 @@
 
 const redis = require('redis');
 const calendar = require('node-calendar');
-const client = redis.createClient(process.env.REDIS_URL);
-//const client = redis.createClient("redis://h:pcja62bcf30eal6edisiktfvkno@ec2-174-129-199-193.compute-1.amazonaws.com:6869");
+//const client = redis.createClient(process.env.REDIS_URL);
+const client = redis.createClient("redis://h:pcja62bcf30eal6edisiktfvkno@ec2-174-129-199-193.compute-1.amazonaws.com:6869");
 
-function isBizCaz(month, day, year, cb) {
+function getBizCazData(month, day, year, cb) {
     let hash = `${month}/${year}`;
 
     client.hget(hash, day, (err, reply) => {
-        let isBizCaz;
-        if (reply === "1")
-            isBizCaz = true;
-        else if (reply === "0")
-            isBizCaz = false;
-        else
-            isBizCaz = null;
+        let isBizCaz, notes;
 
-        cb(isBizCaz);
+
+        if (reply == null) {
+            isBizCaz = null;
+            notes = null;
+        }
+        else {
+            let bizCazStatus = reply.substr(0, 1);
+            notes = reply.substr(1);
+            if (bizCazStatus === "1")
+                isBizCaz = true;
+            else if (bizCazStatus === "0")
+                isBizCaz = false;
+        }
+
+        cb({
+            isBizCaz: isBizCaz,
+            notes: notes
+        });
     })
 }
 
@@ -117,7 +128,7 @@ function destructDatetoComponents(date) {
     }
 }
 
-function upateBizCazValue(date, value, cb) {
+function upateBizCazValue(date, value, notes, cb) {
     let deconstructedDate = destructDatetoComponents(date);
     let hash = `${deconstructedDate.month}/${deconstructedDate.year}`;
 
@@ -129,6 +140,10 @@ function upateBizCazValue(date, value, cb) {
     }
 
     else if (value == 0 || value == 1) {
+
+        if (notes != "")
+            value += notes;
+
         updateDate(hash, deconstructedDate.day, value, (err, status) => {
             if (err) console.log(err);
             cb(status);
@@ -149,7 +164,7 @@ function updateDate(hash, day, valueToUpdate, cb) {
 }
 
 module.exports = {
-    isBizCaz: isBizCaz,
+    getBizCazData: getBizCazData,
     getCurrentDate: getCurrentDate,
     getCurrentAdminDate: getCurrentAdminDate,
     getFormatDate: getFormatDate,
