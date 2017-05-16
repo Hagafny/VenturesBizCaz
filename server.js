@@ -3,12 +3,19 @@
 const express = require('express');
 const app = express();
 const path = require('path');
+const bodyParser = require('body-parser');
 const dateService = require('./dateService.js');
 const logicService = require('./logicService.js');
 const favicon = require('serve-favicon');
 
 app.set('port', (process.env.PORT || 5000));
 app.set('view engine', 'pug');
+
+app.use(bodyParser.urlencoded({
+    extended: false
+}))
+
+app.use(bodyParser.json());
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(__dirname + '/public/favicon.ico'));
@@ -37,6 +44,16 @@ app.get('/api/getMonthData/:month/:year', (req, res) => {
         res.json(monthData);
     });
 
+});
+
+app.post('/api/upateBizCazValue/', (req, res) => {
+    dateService.upateBizCazValue(req.body.date, req.body.value, (status) => {
+        res.json({ status: status });
+    });
+});
+
+app.get('/what', (req, res) => {
+    res.json({wat:"wat"});
 });
 
 app.listen(app.get('port'), () => {

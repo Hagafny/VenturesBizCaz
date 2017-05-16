@@ -3,7 +3,6 @@ const path = require('path');
 const dateService = require('./dateService.js');
 
 function getData(month, day, year, isBizCaz) {
-    console.log(year);
     let BizCazData = {
         currentDate: dateService.getFormatDate(month, day, year),
         nextDay: dateService.getNextDay(month, day, year),

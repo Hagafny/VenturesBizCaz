@@ -4,3 +4,9 @@ body {
 .starter-template { 
   text-align: center;
 }
+
+.monthChanger{
+color: #0275d8;
+padding: 15px;
+cursor: pointer;
+}

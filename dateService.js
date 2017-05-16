@@ -1,14 +1,16 @@
 'use strict';
 
 const redis = require('redis');
-const client = redis.createClient("redis://h:pcja62bcf30eal6edisiktfvkno@ec2-174-129-199-193.compute-1.amazonaws.com:6869");
 const calendar = require('node-calendar');
-//const client = redis.createClient(process.env.REDIS_URL);
+const client = redis.createClient(process.env.REDIS_URL);
+//const client = redis.createClient("redis://h:pcja62bcf30eal6edisiktfvkno@ec2-174-129-199-193.compute-1.amazonaws.com:6869");
 
-function isBizCaz(day, month, year, cb) {
+function isBizCaz(month, day, year, cb) {
+    let hash = `${month}/${year}`;
+    console.log(hash);
 
-    let key = getFormatDate(day, month, year);
-    client.get(key, (err, reply) => {
+    client.hget(hash, day, (err, reply) => {
+        console.log(reply);
         let isBizCaz;
         if (reply === "1")
             isBizCaz = true;
@@ -93,8 +95,7 @@ function getMonthData(month, year, cb) {
         var monthData = [];
         for (var day in allDaysOfTheMonth) {
             if (day != 0 && day <= endingDay) {
-                //var key = getFormatDate(month, day, year);
-                var value = keysValues[day] != undefined ? keysValues[day] : '-1';
+                var value = keysValues && keysValues[day] != undefined ? keysValues[day] : '-1';
                 monthData.push(value);
             }
         }
@@ -102,6 +103,52 @@ function getMonthData(month, year, cb) {
     });
 }
 
+function destructDatetoComponents(date) {
+    let year = date.slice(-2);
+    let firstIndexOfSlesh = date.indexOf('/');
+    let month = date.substr(0, firstIndexOfSlesh);
+
+    let tempString = date.substr(firstIndexOfSlesh + 1);
+    let secondIndexOfSlesh = tempString.indexOf('/');
+    let day = tempString.substr(0, secondIndexOfSlesh);
+
+    return {
+        day: day,
+        month: month,
+        year: year
+    }
+}
+
+function upateBizCazValue(date, value, cb) {
+    let deconstructedDate = destructDatetoComponents(date);
+    let hash = `${deconstructedDate.month}/${deconstructedDate.year}`;
+
+    if (value == -1) {
+        deleteDate(hash, deconstructedDate.day, (err, status) => {
+            if (err) console.log(err);
+            cb(status);
+        });
+    }
+
+    else if (value == 0 || value == 1) {
+        updateDate(hash, deconstructedDate.day, value, (err, status) => {
+            if (err) console.log(err);
+            cb(status);
+        });
+    }
+}
+
+function deleteDate(hash, day, cb) {
+    client.hdel(hash, day, (err, status) => {
+        cb(err, status);
+    });
+}
+
+function updateDate(hash, day, valueToUpdate, cb) {
+    client.hset(hash, day, valueToUpdate, (err, status) => {
+        cb(err, status);
+    });
+}
 
 module.exports = {
     isBizCaz: isBizCaz,
@@ -110,5 +157,6 @@ module.exports = {
     getFormatDate: getFormatDate,
     getNextDay: getNextDay,
     getPreviousDay: getPreviousDay,
-    getMonthData: getMonthData
+    getMonthData: getMonthData,
+    upateBizCazValue: upateBizCazValue
 };

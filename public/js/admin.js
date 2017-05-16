@@ -11,6 +11,23 @@ var buttonValues = ["N/A", "No", "Yes"];
             var bizcaz = e.currentTarget.dataset.bizcaz;
             updateBizCazValue(date, bizcaz);
         });
+
+        // $("#prevMonth").on("click", function () {
+        //     var urlInfo = getInfoFromUrl();
+        //     var month = urlInfo.month;
+        //     var year = urlInfo.year;
+
+        //     if (month == 1) {
+        //         month == 12;
+        //         year == 1;
+        //     }
+        //     else
+        //         month--;
+
+        //     var newAdminUrl = location.host + "/admin/" + month + "/" + year;
+
+        //     window.location = newAdminUrl
+        // })
     }
 
 
@@ -97,9 +114,25 @@ var buttonValues = ["N/A", "No", "Yes"];
 
     }
 
+    function updateBizCazValue(date, value) {
+        var url = "/api/upateBizCazValue/";
+        var data = {
+            date: date,
+            value: value
+        };
+        data = JSON.stringify(data);
 
-
-    function updateBizCazValue(data, value) {
-
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: data,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+            },
+            failure: function (errMsg) {
+                alert(errMsg);
+            }
+        });
     }
 })()

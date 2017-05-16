@@ -10,6 +10,7 @@
   "author": "Ron Hagafny",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.17.1",
     "express": "^4.14.0",
     "node-calendar": "^0.1.4",
     "pug": "^0.1.0",
