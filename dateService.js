@@ -7,10 +7,8 @@ const client = redis.createClient(process.env.REDIS_URL);
 
 function isBizCaz(month, day, year, cb) {
     let hash = `${month}/${year}`;
-    console.log(hash);
 
     client.hget(hash, day, (err, reply) => {
-        console.log(reply);
         let isBizCaz;
         if (reply === "1")
             isBizCaz = true;
