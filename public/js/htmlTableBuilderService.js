@@ -67,18 +67,16 @@ var buttonValues = ["N/A", "No", "Yes"];
             if (isActiveButton)
                 buttonMenu += "checked";
             buttonMenu += " > ";
-
             buttonMenu += buttonValue;
-
             buttonMenu += "</label>";
 
             return buttonMenu;
-
         }
 
         var service = {
             buildDateTable: buildDateTable
         }
+        
         return service;
     }
     tableBuilderService = tableBuilder;

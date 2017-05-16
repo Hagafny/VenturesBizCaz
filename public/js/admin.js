@@ -1,5 +1,4 @@
 (function () {
-
     "use strict";
 
     getData();
@@ -85,7 +84,6 @@
             value: value,
             notes: notes
         };
-
         data = JSON.stringify(data);
 
         $.ajax({

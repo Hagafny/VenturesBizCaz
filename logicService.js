@@ -26,8 +26,6 @@ function getData(month, day, year, bizcazDBData) {
     return BizCazData;
 }
 
-
-
 module.exports = {
     getData: getData
 };
