@@ -1,4 +1,4 @@
-import HtmlTableBuilderService from "./htmlTableBuilderService";
+import HTMlTableBuilder from "./htmlTableBuilderService";
 
 getData();
 attachEvents();
@@ -13,7 +13,7 @@ function getData() {
     var ajaxPath = baseUrl + path;
 
     $.get(ajaxPath, function (res) {
-        HtmlTableBuilderService().buildDateTable(res, month, year);
+        HTMlTableBuilder(res, month, year);
     });
 }
 
