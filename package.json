@@ -4,7 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "postinstall": "webpack -p"
   },
   "keywords": [],
   "author": "Ron Hagafny",
@@ -12,10 +13,19 @@
   "dependencies": {
     "body-parser": "^1.17.1",
     "express": "^4.14.0",
+    "jshint-loader": "^0.8.4",
     "node-calendar": "^0.1.4",
     "pug": "^0.1.0",
     "redis": "^2.6.2",
     "serve-favicon": "^2.3.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "babel-preset-es2015": "^6.24.1",
+    "css-loader": "^0.28.1",
+    "style-loader": "^0.17.0",
+    "webpack": "^2.5.1",
+    "webpack-dev-server": "^2.4.5"
+  }
 }
