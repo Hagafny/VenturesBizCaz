@@ -19,8 +19,8 @@ function getData() {
 
 function attachEvents() {
     $(document).on("change", "input[type=radio]", onRadioButtonChange);
-    $("#prevMonth").click(prevMonth);
-    $("#nextMonth").click(nextMonth);
+    $(document).on("click", "#prevMonth", prevMonth);
+    $(document).on("click", "#nextMonth", nextMonth);
 }
 
 function prevMonth(e) {
@@ -72,7 +72,7 @@ function onRadioButtonChange(e) {
     var date = e.currentTarget.dataset.date;
     var bizcaz = e.currentTarget.dataset.bizcaz;
     var notes = $("textarea[data-date='" + date + "']").val();
-    
+
     updateBizCazValue(date, bizcaz, notes);
 }
 
